@@ -14,7 +14,18 @@
   </form>
   <script src="/socket.io/socket.io.js"></script>
   <script>
-    const socket = io();
+    window.onload = function() {
+      const socket = io();
+      const form = document.querySelector('form');
+      const message = document.getElementById('m');
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        console.log('Hello from the handler');
+        socket.emit('chat message', message.value);
+        message.value = '';
+      });
+    }
   </script>
 </body>
 </html>
